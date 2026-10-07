@@ -54,3 +54,4 @@ The catalogue now carries a structured `details` object for every record. It sup
 High-priority opportunities were researched against official authority sources, including UPSC, SSC, IAF, Indian Navy, Indian Coast Guard, IBPS, SBI, RBI, SEBI, RRB and CTET. The report displays researched information instead of the old generic “not stored” wording. Where an authority source does not publish a rule in the source reviewed, the report explicitly says that the rule was not specified in that source rather than inventing a value.
 
 The eligibility engine uses researched age/percentage information where available and keeps reservation, domicile, gender, nationality and physical/medical conditions as verification-aware rules.
+Vercel deployment sync
