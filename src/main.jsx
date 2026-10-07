@@ -618,8 +618,7 @@ function App(){
 
 
 
-  if(!window\\.confirm(`Delete the report for ${r.studentName}? This will remove it from history and this browser's stored PDF.`))return;
-
+ if(!window.confirm(`Delete the report for ${r.studentName}? This will remove it from history and this browser's data.`))
 
 
   try{await deletePdfBlob(r.id);}catch(err){console.error(err);}
