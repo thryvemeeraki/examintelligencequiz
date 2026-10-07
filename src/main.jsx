@@ -182,7 +182,7 @@ const ageOf=(dob)=>{if(!dob)return null; const d=new Date(dob),n=new Date(); let
 
 
 
-const level=(e)=>{const v=String(e||"").toLowerCase(); if(/class\s**\\***10|10th|matric|secondary/.test(v))return 10; if(/class\s**\\***12|12th|10**\\+**2|senior secondary/.test(v))return 12; if(/diploma|iti/.test(v))return 13; if(/graduat|bachelor|degree/.test(v))return 15; if(/postgraduat|master|phd|doctorate/.test(v))return 17; return 0;};
+const level=(e)=>{const v=String(e||"").toLowerCase(); if(/class\s*10|10th|matric|secondary/.test(v))return 10; if(/class\s*12|12th|10\+2|senior secondary/.test(v))return 12; if(/diploma|iti/.test(v))return 13; if(/graduat|bachelor|degree/.test(v))return 15; if(/postgraduat|master|phd|doctorate/.test(v))return 17; return 0;};
 
 
 
@@ -194,7 +194,7 @@ function extractAgeRule(q){
 
 
 
- const range=q.match(/(?:age|aged|between)\D{0,12}(\d{1,2})\s**\\***[–-]\s**\\***(\d{1,2})/i);
+ const range=q.match(/(?:age|aged|between)\D{0,12}(\d{1,2})\s*[–-]\s*(\d{1,2})/i);
 
 
 
@@ -294,11 +294,11 @@ function analyze(student,e){
 
 
 
- if(/class\s\\*10|10th|matric|secondary/.test(lower))required.push(10);
+ if(/class\s*10|10th|matric|secondary/.test(lower))required.push(10);
 
 
 
- if(/class\s\\*12|12th|10\\+2|senior secondary/.test(lower))required.push(12);
+ if(/class\s*12|12th|10\+2|senior secondary/.test(lower))required.push(12);
 
 
 
@@ -330,7 +330,7 @@ function analyze(student,e){
 
 
 
-  [/engineering|b**\\\\.**tech|btech|technical/,/engineering|pcm|science|physics|mathematics/,'engineering/technical'],
+  [/engineering|b\.tech|btech|technical/,/engineering|pcm|science|physics|mathematics/,'engineering/technical'],
 
 
 
@@ -382,7 +382,7 @@ function analyze(student,e){
 
 
 
- const pct=pctText.match(/(?:minimum|at least|minimum of|with)\s\\*(\d{2})\s\\*%/i) || lower.match(/(?:minimum|at least|minimum of)\s\\*(\d{2})\s\\*%/i);
+ const pct=pctText.match(/(?:minimum|at least|minimum of|with)\s*(\d{2})\s*%/i) || lower.match(/(?:minimum|at least|minimum of)\s*(\d{2})\s*%/i);
 
 
 
@@ -390,7 +390,7 @@ function analyze(student,e){
 
 
 
- const attemptMatch=lower.match(/(?:maximum|up to|limit of)\s\\*(\d+)\s\\*attempts?/i);
+ const attemptMatch=lower.match(/(?:maximum|up to|limit of)\s*(\d+)\s*attempts?/i);
 
 
 
@@ -857,7 +857,7 @@ function Eligibility({query,setQuery,results,fetchStudent,form,setForm,fillStude
 
 
 
-    <Field label="Student ID" value={form.id} onChange={v=>update("id",v)} placeholder="Optional"/><Field label="Student Name \\*" value={form.name} onChange={v=>update("name",v)}/><Field label="Father's Name" value={form.fatherName} onChange={v=>update("fatherName",v)} placeholder="Optional"/><Field label="Date of Birth \\*" type="date" value={form.dob} onChange={v=>update("dob",v)}/>
+    <Field label="Student ID" value={form.id} onChange={v=>update("id",v)} placeholder="Optional"/><Field label="Student Name \*" value={form.name} onChange={v=>update("name",v)}/><Field label="Father's Name" value={form.fatherName} onChange={v=>update("fatherName",v)} placeholder="Optional"/><Field label="Date of Birth \*" type="date" value={form.dob} onChange={v=>update("dob",v)}/>
 
 
 
@@ -865,7 +865,7 @@ function Eligibility({query,setQuery,results,fetchStudent,form,setForm,fillStude
 
 
 
-    <Select label="State / Domicile" value={form.state} onChange={v=>update("state",v)} opts={["Punjab","Haryana","Delhi","Himachal Pradesh","Uttar Pradesh","Rajasthan","Maharashtra","Gujarat","Karnataka","West Bengal","Other"]}/><Select label="Highest Education \\*" value={form.education} onChange={v=>update("education",v)} opts={["Class 10","Class 12","Diploma","Graduation","Postgraduation"]}/><Field label="Stream / Subject" value={form.stream} onChange={v=>update("stream",v)} placeholder="e.g. PCM, Commerce, Law"/><Field label="Percentage" type="number" value={form.percentage} onChange={v=>update("percentage",v)} placeholder="e.g. 78"/>
+    <Select label="State / Domicile" value={form.state} onChange={v=>update("state",v)} opts={["Punjab","Haryana","Delhi","Himachal Pradesh","Uttar Pradesh","Rajasthan","Maharashtra","Gujarat","Karnataka","West Bengal","Other"]}/><Select label="Highest Education \*" value={form.education} onChange={v=>update("education",v)} opts={["Class 10","Class 12","Diploma","Graduation","Postgraduation"]}/><Field label="Stream / Subject" value={form.stream} onChange={v=>update("stream",v)} placeholder="e.g. PCM, Commerce, Law"/><Field label="Percentage" type="number" value={form.percentage} onChange={v=>update("percentage",v)} placeholder="e.g. 78"/>
 
 
 
@@ -885,7 +885,7 @@ function Eligibility({query,setQuery,results,fetchStudent,form,setForm,fillStude
 
 
 
-  <section className="panel profile-preview"><div className="panel-head"><div><span className="eyebrow">STUDENT RECORD</span><h3>{student?student.name:"No student loaded"}</h3></div></div>{student?<><div className="student-profile"><div className="avatar large">{student.name[0]}</div><div><h4>{student.name}</h4><p>{student.fatherName||"Father's name not provided"} · {student.id}</p></div></div><div className="mini-grid"><Mini k="Age" v={ageOf(student.dob)??"—"}/><Mini k="Education" v={student.education}/><Mini k="Category" v={student.category}/><Mini k="Quota" v={student.quota||student.category}/><Mini k="Attempts" v={student.previousAttempts?student.attempts:0}/><Mini k="State" v={student.state}/><Mini k="Stream" v={student.stream}/><Mini k="Marks" v={`${student.percentage||0}%`}/></div><div className="elig-score"><div><span>Eligible opportunities</span><b>{total}</b></div><div className="ring"><span>{Math.min(99,Math.round(total/Math.max(exams.length,1)\\*100))}%</span></div></div><p className="muted">Filters are preferences. Final eligibility depends on the current official notification and post-specific rules.</p></>:<div className="empty-state"><Users/><b>Fetch or fill a student</b><span>The eligibility results and report action will appear here after student data is ready.</span></div>}</section></div>
+  <section className="panel profile-preview"><div className="panel-head"><div><span className="eyebrow">STUDENT RECORD</span><h3>{student?student.name:"No student loaded"}</h3></div></div>{student?<><div className="student-profile"><div className="avatar large">{student.name[0]}</div><div><h4>{student.name}</h4><p>{student.fatherName||"Father's name not provided"} · {student.id}</p></div></div><div className="mini-grid"><Mini k="Age" v={ageOf(student.dob)??"—"}/><Mini k="Education" v={student.education}/><Mini k="Category" v={student.category}/><Mini k="Quota" v={student.quota||student.category}/><Mini k="Attempts" v={student.previousAttempts?student.attempts:0}/><Mini k="State" v={student.state}/><Mini k="Stream" v={student.stream}/><Mini k="Marks" v={`${student.percentage||0}%`}/></div><div className="elig-score"><div><span>Eligible opportunities</span><b>{total}</b></div><div className="ring"><span>{Math.min(99,Math.round(total/Math.max(exams.length,1)*100))}%</span></div></div><p className="muted">Filters are preferences. Final eligibility depends on the current official notification and post-specific rules.</p></>:<div className="empty-state"><Users/><b>Fetch or fill a student</b><span>The eligibility results and report action will appear here after student data is ready.</span></div>}</section></div>
 
 
 
@@ -929,7 +929,7 @@ const Mini=({k,v})=><div><span>{k}</span><b>{v}</b></div>;
 
 
 
-function Job({job,student}){const a=analyze(student,job); const d=job.details||{}; return <article className="job-card detailed"><div className="job-top"><span>{jobType(job)}</span><span className="dot"/><span>{examType(job)}</span></div><h4>{job.name}</h4><p>{job.body||job.purpose}</p><div className="job-meta"><span>{job.qualification}</span><span>{job.difficulty}</span><span>{job.stages}</span></div><div className="reason-block"><div className="reason-title good">✓ Why this matches</div>{a.matches.slice(0,5).map((x,i)=><div className="reason" key={i}>{x}</div>)}{a.matches.length===0&&<div className="reason muted">No confirmed positive rule was found for the student profile; review the detailed job / exam information below.</div>}</div><div className="job-detail-summary"><b>DETAILED JOB / EXAM INFORMATION</b><span><strong>Age:</strong> {d.ageRule||"Not specified in source reviewed"}</span><span><strong>Qualification:</strong> {job.eligibility||job.qualification||"See official notice"}</span><span><strong>Selection:</strong> {d.selectionProcess||job.stages||"See official notice"}</span><span><strong>Posts:</strong> {d.postsCovered||job.purpose||"See official notice"}</span>{d.payScale&&<span><strong>Pay:</strong> {d.payScale}</span>}{d.vacancyInfo&&<span><strong>Vacancies:</strong> {d.vacancyInfo}</span>}<span><strong>Reservation:</strong> {d.reservationRule||"See current notification"}</span><span><strong>Verified:</strong> {d.verifiedOn||"Catalogue source"}</span></div><div className="job-foot"><span>Review the detailed information and current official notification before applying</span>{job.applyUrl?<a href={job.applyUrl} target="\\\_blank" rel="noreferrer" className="apply-link">Open official portal <ExternalLink/></a>:<span>No official link</span>}</div></article>}
+function Job({job,student}){const a=analyze(student,job); const d=job.details||{}; return <article className="job-card detailed"><div className="job-top"><span>{jobType(job)}</span><span className="dot"/><span>{examType(job)}</span></div><h4>{job.name}</h4><p>{job.body||job.purpose}</p><div className="job-meta"><span>{job.qualification}</span><span>{job.difficulty}</span><span>{job.stages}</span></div><div className="reason-block"><div className="reason-title good">✓ Why this matches</div>{a.matches.slice(0,5).map((x,i)=><div className="reason" key={i}>{x}</div>)}{a.matches.length===0&&<div className="reason muted">No confirmed positive rule was found for the student profile; review the detailed job / exam information below.</div>}</div><div className="job-detail-summary"><b>DETAILED JOB / EXAM INFORMATION</b><span><strong>Age:</strong> {d.ageRule||"Not specified in source reviewed"}</span><span><strong>Qualification:</strong> {job.eligibility||job.qualification||"See official notice"}</span><span><strong>Selection:</strong> {d.selectionProcess||job.stages||"See official notice"}</span><span><strong>Posts:</strong> {d.postsCovered||job.purpose||"See official notice"}</span>{d.payScale&&<span><strong>Pay:</strong> {d.payScale}</span>}{d.vacancyInfo&&<span><strong>Vacancies:</strong> {d.vacancyInfo}</span>}<span><strong>Reservation:</strong> {d.reservationRule||"See current notification"}</span><span><strong>Verified:</strong> {d.verifiedOn||"Catalogue source"}</span></div><div className="job-foot"><span>Review the detailed information and current official notification before applying</span>{job.applyUrl?<a href={job.applyUrl} target="_blank" rel="noreferrer" className="apply-link">Open official portal <ExternalLink/></a>:<span>No official link</span>}</div></article>}
 
 
 
