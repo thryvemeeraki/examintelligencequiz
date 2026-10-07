@@ -24,3 +24,11 @@ nav{display:grid;gap:5px}nav button{border:0;background:transparent;color:#D2B9A
 .history-actions{display:flex;align-items:center;justify-content:flex-end;gap:6px;flex-wrap:wrap}.history-actions button{font-family:inherit;cursor:pointer}.history-edit,.history-delete{border:1px solid #E2D4C8;background:#FFFDF9;color:#5A3427;border-radius:9px;padding:8px 9px;display:inline-flex;align-items:center;gap:5px;font-size:8px;font-weight:800;justify-content:center}.history-edit:hover{background:#F3E3D8;border-color:#D8B7A3}.history-delete{color:#9D4D3D;border-color:#E8CFC7;background:#FFF3ED}.history-delete:hover{background:#FCEDE5;border-color:#DDB7A9}.history-actions svg{width:13px}.report-row{grid-template-columns:38px minmax(180px,1fr) 90px 115px 95px minmax(250px,auto)}
 @media(max-width:1000px){.report-row{grid-template-columns:38px minmax(150px,1fr) 80px 105px 90px minmax(210px,auto)}.history-actions{justify-content:flex-start}}
 @media(max-width:700px){.report-row{grid-template-columns:38px 1fr}.report-row>div:nth-child(n+3),.status{display:none}.history-actions{grid-column:2;display:flex;justify-content:flex-start}.history-actions button{font-size:8px}.history-edit,.history-delete,.history-download{display:inline-flex}}
+
+/* Admin report filters */
+.admin-filter-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:14px;align-items:end;margin-top:6px}
+.admin-clear{height:48px;white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:8px}
+.filter-summary{display:flex;justify-content:space-between;gap:16px;margin-top:16px;padding-top:14px;border-top:1px solid rgba(130,91,68,.16);font-size:13px;color:#735b50}
+.filter-summary b{color:#7d3f27}
+@media (max-width:900px){.admin-filter-grid{grid-template-columns:1fr 1fr}.admin-clear{width:100%}}
+@media (max-width:600px){.admin-filter-grid{grid-template-columns:1fr}.filter-summary{flex-direction:column;gap:6px}}
